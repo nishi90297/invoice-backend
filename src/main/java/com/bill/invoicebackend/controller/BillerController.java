@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RestController
@@ -24,6 +25,11 @@ public class BillerController {
 
 //        List<Biller> users = mongoTemplate.find(query,Biller.class);
         return billerRepository.findAll();
+    }
+
+    @GetMapping(value = "getOneBiller/{id}")
+    public Biller getOneBiller(@PathVariable("id") String id){
+        return billerRepository.findById(id).get();
     }
 
     @PostMapping(value = "/register")
@@ -48,9 +54,10 @@ public class BillerController {
         }
     }
 
-    @PostMapping(value = "editBiller")
-    public Biller editBiller(@RequestBody Biller biller){
-        return  billerRepository.save(biller);
+    @PostMapping(value = "updateBiller")
+    public String updateBiller(@RequestBody Biller biller){
+        billerRepository.save(biller);
+        return "Biller Successfully Updated!!";
     }
 
 }
