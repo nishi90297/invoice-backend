@@ -27,14 +27,30 @@ public class BillerController {
     }
 
     @PostMapping(value = "/register")
-    public String registerBiller(@RequestBody Biller newBiller){
+    public String registerBiller(@RequestBody Biller biller){
         try{
-            billerRepository.insert(newBiller);
-            return "Register Successfully Added";
+            billerRepository.insert(biller);
+            return "Register Successfully Added!!";
         }
         catch (Exception e){
             return e.getMessage();
         }
+    }
+
+    @PostMapping(value = "deleteBiller")
+    public String deleteBiller(@RequestParam(value = "id") String id){
+        try {
+            billerRepository.deleteById(id);
+            return  "Biller Successfully Deleted!!";
+        }
+        catch (Exception e){
+            return e.getMessage();
+        }
+    }
+
+    @PostMapping(value = "editBiller")
+    public Biller editBiller(@RequestBody Biller biller){
+        return  billerRepository.save(biller);
     }
 
 }
