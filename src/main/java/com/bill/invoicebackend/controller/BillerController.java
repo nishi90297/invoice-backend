@@ -5,6 +5,7 @@ import com.bill.invoicebackend.respository.BillerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
@@ -35,6 +36,7 @@ public class BillerController {
     @PostMapping(value = "/register")
     public String registerBiller(@RequestBody Biller biller){
         try{
+            biller.setPassword(new BCryptPasswordEncoder().encode(biller.getPassword()));
             billerRepository.insert(biller);
             return "Register Successfully Added!!";
         }
@@ -56,6 +58,7 @@ public class BillerController {
 
     @PostMapping(value = "updateBiller")
     public String updateBiller(@RequestBody Biller biller){
+        biller.setPassword(new BCryptPasswordEncoder().encode(biller.getPassword()));
         billerRepository.save(biller);
         return "Biller Successfully Updated!!";
     }
