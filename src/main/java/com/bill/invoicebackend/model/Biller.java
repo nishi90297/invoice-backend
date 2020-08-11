@@ -1,7 +1,10 @@
 package com.bill.invoicebackend.model;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(value = "Biller")
 public class Biller {
@@ -9,6 +12,8 @@ public class Biller {
     @Id
     private String id;
     private Name name;
+
+    @Indexed(unique=true)
     private String email;
     private String password;
     private String phone;

@@ -3,6 +3,7 @@ package com.bill.invoicebackend.controller;
 import com.bill.invoicebackend.model.Biller;
 import com.bill.invoicebackend.respository.BillerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -12,23 +13,31 @@ import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RestController
-@CrossOrigin
-@RequestMapping(value ="biller")
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
+//@RequestMapping(value ="biller")
 public class BillerController {
 
     @Autowired
     public BillerRepository billerRepository;
 
-    @GetMapping()
-    public List<Biller> getAllBiller(){
-//        Query query = new Query();
-//        query.addCriteria(Criteria.where("first").is("Nishtha").and())
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
-//        List<Biller> users = mongoTemplate.find(query,Biller.class);
+    @GetMapping
+    public List<Biller> getAllBiller(){
         return billerRepository.findAll();
     }
 
-    @GetMapping(value = "getOneBiller/{id}")
+    @GetMapping(value="/billerByQuery")
+    public List<Biller> getBillerByQuery(){
+        Query query = new Query();
+        query.addCriteria(Criteria.where("name.first").is("Nishtha").and("name.last").is("Garg"));
+        List<Biller> users = mongoTemplate.find(query,Biller.class);
+        return users;
+    }
+
+
+    @GetMapping(value = "/getOneBiller/{id}")
     public Biller getOneBiller(@PathVariable("id") String id){
         return billerRepository.findById(id).get();
     }
@@ -45,7 +54,7 @@ public class BillerController {
         }
     }
 
-    @PostMapping(value = "deleteBiller")
+    @PostMapping(value = "/deleteBiller")
     public String deleteBiller(@RequestParam(value = "id") String id){
         try {
             billerRepository.deleteById(id);
@@ -56,7 +65,7 @@ public class BillerController {
         }
     }
 
-    @PostMapping(value = "updateBiller")
+    @PostMapping(value = "/updateBiller")
     public String updateBiller(@RequestBody Biller biller){
         biller.setPassword(new BCryptPasswordEncoder().encode(biller.getPassword()));
         billerRepository.save(biller);
