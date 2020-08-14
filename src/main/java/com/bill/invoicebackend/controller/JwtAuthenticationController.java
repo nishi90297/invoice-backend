@@ -3,7 +3,7 @@ package com.bill.invoicebackend.controller;
 import com.bill.invoicebackend.configuration.JwtTokenUtil;
 import com.bill.invoicebackend.model.JwtRequest;
 import com.bill.invoicebackend.model.JwtResponse;
-import com.bill.invoicebackend.service.JwtUserDetailsService;
+import com.bill.invoicebackend.service.BillerDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,11 +21,11 @@ public class JwtAuthenticationController {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
     @Autowired
-    private JwtUserDetailsService userDetailsService;
+    private BillerDetailsService billerDetailsService;
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
-        final UserDetails userDetails = userDetailsService
+        final UserDetails userDetails = billerDetailsService
                 .loadUserByUsername(authenticationRequest.getUsername());
         final String token = jwtTokenUtil.generateToken(userDetails);
         return ResponseEntity.ok(new JwtResponse(token));

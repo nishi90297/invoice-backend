@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 
 @Service
-public class JwtUserDetailsService implements UserDetailsService {
+public class BillerDetailsService implements UserDetailsService {
 
     @Autowired
     private BillerRepository billerRepository;

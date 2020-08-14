@@ -13,7 +13,6 @@ import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 //@RequestMapping(value ="biller")
 public class BillerController {
 
