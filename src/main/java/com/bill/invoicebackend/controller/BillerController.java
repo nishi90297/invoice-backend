@@ -7,14 +7,19 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 //@RequestMapping(value ="biller")
 public class BillerController {
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     public BillerRepository billerRepository;
@@ -44,9 +49,9 @@ public class BillerController {
     @PostMapping(value = "/register")
     public String registerBiller(@RequestBody Biller biller){
         try{
-            biller.setPassword(new BCryptPasswordEncoder().encode(biller.getPassword()));
+            biller.setPassword(passwordEncoder.encode(biller.getPassword()));
             billerRepository.insert(biller);
-            return "Register Successfully Added!!";
+            return "User Successfully Registered!!";
         }
         catch (Exception e){
             return e.getMessage();
@@ -66,7 +71,7 @@ public class BillerController {
 
     @PostMapping(value = "/updateBiller")
     public String updateBiller(@RequestBody Biller biller){
-        biller.setPassword(new BCryptPasswordEncoder().encode(biller.getPassword()));
+        biller.setPassword(passwordEncoder.encode(biller.getPassword()));
         billerRepository.save(biller);
         return "Biller Successfully Updated!!";
     }
