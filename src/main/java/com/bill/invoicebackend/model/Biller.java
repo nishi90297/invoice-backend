@@ -15,6 +15,7 @@ public class Biller {
 
     @Indexed(unique=true)
     private String email;
+
     private String password;
     private String phone;
     private Address address;

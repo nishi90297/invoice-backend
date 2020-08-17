@@ -2,19 +2,12 @@ package com.bill.invoicebackend.model;
 
 public class Address {
 
-    private String street;
     private String apartmentNumber;
+    private String street;
     private String city;
-    private String postalCode;
+    private String state;
     private String country;
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
+    private String postalCode;
 
     public String getApartmentNumber() {
         return apartmentNumber;
@@ -22,6 +15,14 @@ public class Address {
 
     public void setApartmentNumber(String apartmentNumber) {
         this.apartmentNumber = apartmentNumber;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
     }
 
     public String getCity() {
@@ -32,12 +33,12 @@ public class Address {
         this.city = city;
     }
 
-    public String getPostalCode() {
-        return postalCode;
+    public String getState() {
+        return state;
     }
 
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
+    public void setState(String state) {
+        this.state = state;
     }
 
     public String getCountry() {
@@ -46,5 +47,13 @@ public class Address {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
     }
 }
