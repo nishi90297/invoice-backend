@@ -11,10 +11,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -42,12 +39,17 @@ public class InvoiceController {
         invoice.setStatus(InvoiceStatus.DATA_SAVED);
         System.out.println(invoice.toString());
         invoiceRepository.save(invoice);
-        return "Successfully Added";
+        return invoiceRepository.save(invoice).getId();
     }
 
     @GetMapping(value = "getAllInvoices")
     public List<Invoice> getAllInvoices(){
         return invoiceRepository.findByCreatedBy(getBillerInfo().getId());
+    }
+
+    @GetMapping(value = "getInvoiceById/{id}")
+    public Invoice getInvoiceById(@PathVariable("id") String id){
+        return invoiceRepository.findById(id).get();
     }
 
     @GetMapping(value = "getInvoiceNumber")

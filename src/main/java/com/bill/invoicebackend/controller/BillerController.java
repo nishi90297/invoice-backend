@@ -76,8 +76,8 @@ public class BillerController {
         return "Biller Successfully Updated!!";
     }
 
-    @GetMapping(value = "/getBillerInfo")
-    public Biller getBillerInfo(){
+    @GetMapping(value = "/getUserInfo")
+    public Biller getUserInfo(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return billerRepository.findByEmail(authentication.getName());
     }
