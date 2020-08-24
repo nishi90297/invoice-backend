@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -72,6 +74,12 @@ public class BillerController {
         biller.setPassword(passwordEncoder.encode(biller.getPassword()));
         billerRepository.save(biller);
         return "Biller Successfully Updated!!";
+    }
+
+    @GetMapping(value = "/getBillerInfo")
+    public Biller getBillerInfo(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return billerRepository.findByEmail(authentication.getName());
     }
 
 }
