@@ -1,4 +1,4 @@
-package com.bill.invoicebackend.model;
+package com.bill.invoicebackend.model.Biller;
 
 public class Address {
 

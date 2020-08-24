@@ -1,6 +1,6 @@
-package com.bill.invoicebackend.model;
+package com.bill.invoicebackend.model.Invoice;
 
-public class Product {
+public class InvoiceProduct {
 
     private String name;
     private String description;

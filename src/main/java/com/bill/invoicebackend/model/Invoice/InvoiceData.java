@@ -1,13 +1,12 @@
-package com.bill.invoicebackend.model;
+package com.bill.invoicebackend.model.Invoice;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.Instant;
 import java.util.List;
 
-@Document(value = "Invoice")
-public class Invoice {
+public class InvoiceData {
 
     private String payerName;
 
@@ -15,10 +14,11 @@ public class Invoice {
     private String payerEmail;
 
     private String freeText;
-    private List<Product> products;
     private String footer;
+    private List<InvoiceProduct> invoiceProducts;
     private Number discount;
-    private Number total;
+    private Number templateNo;
+    private Instant dueDate;
 
     public String getPayerName() {
         return payerName;
@@ -44,14 +44,6 @@ public class Invoice {
         this.freeText = freeText;
     }
 
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
-
     public String getFooter() {
         return footer;
     }
@@ -68,11 +60,27 @@ public class Invoice {
         this.discount = discount;
     }
 
-    public Number getTotal() {
-        return total;
+    public List<InvoiceProduct> getInvoiceProducts() {
+        return invoiceProducts;
     }
 
-    public void setTotal(Number total) {
-        this.total = total;
+    public void setInvoiceProducts(List<InvoiceProduct> invoiceProducts) {
+        this.invoiceProducts = invoiceProducts;
+    }
+
+    public Number getTemplateNo() {
+        return templateNo;
+    }
+
+    public void setTemplateNo(Number templateNo) {
+        this.templateNo = templateNo;
+    }
+
+    public Instant getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(Instant dueDate) {
+        this.dueDate = dueDate;
     }
 }

@@ -1,16 +1,14 @@
 package com.bill.invoicebackend.controller;
 
-import com.bill.invoicebackend.model.Biller;
+import com.bill.invoicebackend.model.Biller.Biller;
 import com.bill.invoicebackend.respository.BillerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RestController

@@ -1,10 +1,8 @@
-package com.bill.invoicebackend.model;
+package com.bill.invoicebackend.model.Biller;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(value = "Biller")
 public class Biller {

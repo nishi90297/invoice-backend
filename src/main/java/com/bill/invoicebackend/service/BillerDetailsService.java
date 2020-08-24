@@ -1,6 +1,6 @@
 package com.bill.invoicebackend.service;
 
-import com.bill.invoicebackend.model.Biller;
+import com.bill.invoicebackend.model.Biller.Biller;
 import com.bill.invoicebackend.respository.BillerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;

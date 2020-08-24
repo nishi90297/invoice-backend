@@ -1,8 +1,8 @@
 package com.bill.invoicebackend.controller;
 
 import com.bill.invoicebackend.configuration.JwtTokenUtil;
-import com.bill.invoicebackend.model.JwtRequest;
-import com.bill.invoicebackend.model.JwtResponse;
+import com.bill.invoicebackend.model.Biller.JwtRequest;
+import com.bill.invoicebackend.model.Biller.JwtResponse;
 import com.bill.invoicebackend.service.BillerDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
