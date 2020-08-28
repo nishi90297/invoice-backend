@@ -15,7 +15,7 @@ public class InvoiceData {
 
     private String freeText;
     private String footer;
-    private List<InvoiceProduct> invoiceProducts;
+    private List<InvoiceProduct> products;
     private Number discount;
     private Number templateNo;
     private Instant dueDate;
@@ -60,12 +60,12 @@ public class InvoiceData {
         this.discount = discount;
     }
 
-    public List<InvoiceProduct> getInvoiceProducts() {
-        return invoiceProducts;
+    public List<InvoiceProduct> getProducts() {
+        return products;
     }
 
-    public void setInvoiceProducts(List<InvoiceProduct> invoiceProducts) {
-        this.invoiceProducts = invoiceProducts;
+    public void setProducts(List<InvoiceProduct> products) {
+        this.products = products;
     }
 
     public Number getTemplateNo() {

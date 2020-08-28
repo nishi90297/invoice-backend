@@ -16,6 +16,7 @@ public class Invoice {
     private InvoiceStatus invoiceStatus;
     private Integer statusCode;
     private InvoiceData invoiceData;
+    private String invoiceNumber;
 
     @Override
     public String toString() {
@@ -97,5 +98,13 @@ public class Invoice {
 
     public void setInvoiceData(InvoiceData invoiceData) {
         this.invoiceData = invoiceData;
+    }
+
+    public String getInvoiceNumber() {
+        return invoiceNumber;
+    }
+
+    public void setInvoiceNumber(String invoiceNumber) {
+        this.invoiceNumber = invoiceNumber;
     }
 }

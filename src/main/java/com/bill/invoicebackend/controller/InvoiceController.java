@@ -37,8 +37,10 @@ public class InvoiceController {
         invoice.setCreatedBy(getBillerInfo().getId());
         invoice.setCreatedAt();
         invoice.setStatus(InvoiceStatus.DATA_SAVED);
+        invoice.setInvoiceNumber("INV-"+(getInvoiceNumber()-1));
         System.out.println(invoice.toString());
         invoiceRepository.save(invoice);
+
         return invoiceRepository.save(invoice).getId();
     }
 
