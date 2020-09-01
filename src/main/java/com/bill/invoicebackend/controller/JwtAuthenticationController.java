@@ -1,6 +1,6 @@
 package com.bill.invoicebackend.controller;
 
-import com.bill.invoicebackend.configuration.JwtTokenUtil;
+import com.bill.invoicebackend.utils.JwtTokenUtil;
 import com.bill.invoicebackend.model.Biller.JwtRequest;
 import com.bill.invoicebackend.model.Biller.JwtResponse;
 import com.bill.invoicebackend.service.BillerDetailsService;

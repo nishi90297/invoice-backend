@@ -1,4 +1,4 @@
-package com.bill.invoicebackend.configuration;
+package com.bill.invoicebackend.utils;
 
 import java.io.IOException;
 import javax.servlet.FilterChain;
@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.bill.invoicebackend.service.BillerDetailsService;
+import com.bill.invoicebackend.utils.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

@@ -1,4 +1,4 @@
-package com.bill.invoicebackend.model.Invoice;
+package com.bill.invoicebackend.utils.enums;
 
 public enum  InvoiceStatus {
 

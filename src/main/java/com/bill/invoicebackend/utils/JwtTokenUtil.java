@@ -1,4 +1,4 @@
-package com.bill.invoicebackend.configuration;
+package com.bill.invoicebackend.utils;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

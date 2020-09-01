@@ -1,5 +1,6 @@
 package com.bill.invoicebackend.model.Invoice;
 
+import com.bill.invoicebackend.utils.enums.InvoiceStatus;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
