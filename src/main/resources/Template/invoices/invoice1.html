@@ -20,16 +20,16 @@
 </header>
 <main>
     <div id="details" class="clearfix">
+        <div id="invoice">
+            <h1>INVOICE No :- $invoiceNumber$</h1>
+            <div class="date">Date of Invoice: $createdDate$</div>
+            <div class="date">Due Date: $dueDate$</div>
+        </div>
         <div id="client">
             <div class="to">INVOICE TO:</div>
             <h2 class="name">$payerName$</h2>
             <div class="address">$payerAddress$</div>
             <div class="email"><a href="mailto:john@example.com">$payerEmail$</a></div>
-        </div>
-        <div id="invoice">
-            <h1>INVOICE $invoiceNumber$</h1>
-            <div class="date">Date of Invoice: $createdDate$</div>
-            <div class="date">Due Date: $dueDate$</div>
         </div>
     </div>
     <table border="0" cellspacing="0" cellpadding="0">
@@ -82,10 +82,6 @@
 </html>
 
 <style>
-    @font-face {
-  font-family: SourceSansPro;
-  src: url(SourceSansPro-Regular.ttf);
-}
 
 .clearfix:after {
   content: "";
