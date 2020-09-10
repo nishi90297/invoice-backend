@@ -6,6 +6,7 @@ public class InvoiceProduct {
     private String description;
     private Number price;
     private Number quantity;
+    private Number total;
 
     public String getName() {
         return name;
@@ -37,5 +38,13 @@ public class InvoiceProduct {
 
     public void setQuantity(Number quantity) {
         this.quantity = quantity;
+    }
+
+    public Number getTotal() {
+        return total;
+    }
+
+    public void setTotal(Number total) {
+        this.total = total;
     }
 }

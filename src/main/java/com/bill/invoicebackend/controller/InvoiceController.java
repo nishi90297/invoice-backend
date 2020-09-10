@@ -2,6 +2,7 @@ package com.bill.invoicebackend.controller;
 
 import com.bill.invoicebackend.model.Biller.Biller;
 import com.bill.invoicebackend.model.Invoice.Invoice;
+import com.bill.invoicebackend.service.InvoiceService;
 import com.bill.invoicebackend.utils.FilePath;
 import com.bill.invoicebackend.utils.enums.FileTypes;
 import com.bill.invoicebackend.utils.enums.InvoiceStatus;
@@ -33,6 +34,9 @@ public class InvoiceController {
 
     @Autowired
     public InvoiceRepository invoiceRepository;
+
+    @Autowired
+    public InvoiceService invoiceService;
 
     @Autowired
     private MongoTemplate mongoTemplate;
@@ -69,8 +73,10 @@ public class InvoiceController {
         return invoiceRepository.save(invoice).getId();
     }
 
-    @GetMapping(value = "generatePDF")
+    @PostMapping(value = "generatePDF")
     public void generatePDF(Invoice invoice){
+        String tableProductRow = invoiceService.tableProductsRow(invoice.getProducts());
+        System.out.println(tableProductRow);
         try{
             String fileStr = Util.convertFileToString("Template/invoices/invoice1.html")
                     .replace("$payerName$",invoice.getPayerName())
@@ -82,20 +88,22 @@ public class InvoiceController {
                     .replace("$total$",invoice.getTotalAmount().toString())
                     .replace("$discount$",invoice.getDiscount().toString())
                     .replace("$discountedAmount$",invoice.getDiscountedAmount().toString())
-                    .replace("$finalAmount$",invoice.getFinalAmount().toString());
+                    .replace("$finalAmount$",invoice.getFinalAmount().toString()
+                    .replace("$tableProductRow$",invoiceService.tableProductsRow(invoice.getProducts())));
 
 
             //clean up html to render html properly.Will show error if any open tag or any issue.
             HtmlCleaner htmlCleaner = new HtmlCleaner();
-            CleanerProperties cleanerProperties = new CleanerProperties();
+            //tagnode contains clean html code (1st normal cleaning)
+            TagNode cleanedHtmlNode=htmlCleaner.clean(fileStr);
 
+
+            CleanerProperties cleanerProperties = new CleanerProperties();
             // set some properties to non-default values
             cleanerProperties.setTranslateSpecialEntities(true);
             cleanerProperties.setTransResCharsToNCR(true);
             cleanerProperties.setOmitComments(true);
 
-            //tagnode contains clean html code
-            TagNode cleanedHtmlNode=htmlCleaner.clean(fileStr);
 
             FilePath path = new FilePath(getBillerInfo().getId());
 
@@ -109,6 +117,7 @@ public class InvoiceController {
 
             if(folderExists){
                 String tempFileFullPath = path.getFullPath();
+                //2nd cleaning & converting string to HTML
                 PrettyXmlSerializer prettyXmlSerializer = new PrettyXmlSerializer(cleanerProperties);
                 prettyXmlSerializer.writeToFile(cleanedHtmlNode,tempFileFullPath, StandardCharsets.UTF_8.name());
             }
